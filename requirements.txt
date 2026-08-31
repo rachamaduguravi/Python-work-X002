@@ -1,0 +1,4 @@
+# Base development requirements
+black>=24.0.0
+flake8>=7.0.0
+pytest>=8.0.0
