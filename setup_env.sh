@@ -9,6 +9,13 @@ if ! command -v python3 &>/dev/null; then
     sudo apt update && sudo apt install -y python3 python3-venv python3-pip
 fi
 
+# Check if ensurepip/venv is functional
+if ! python3 -c "import ensurepip" &>/dev/null; then
+    echo "ensurepip / python3-venv missing on system. Installing required packages..."
+    PY_VER=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')")
+    sudo apt update && sudo apt install -y python3-venv python3-pip "python${PY_VER}-venv" || sudo apt install -y python3-venv python3-pip
+fi
+
 # Create virtual environment if not present
 if [ ! -d ".venv" ]; then
     echo "Creating virtual environment in .venv..."
